@@ -1,0 +1,220 @@
+﻿<Window x:Class="Practica2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:Practica2"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="470" Width="850" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style TargetType="CheckBox">
+            <Setter Property="Margin" Value="10"></Setter>
+            <Setter Property="FontSize" Value="13"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Foreground" Value="Red"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <!-- Panel de la dereacha -->
+        <!-- Menu inicial. -->
+        <DockPanel Grid.Column="0">
+
+            <StackPanel DockPanel.Dock="Top">
+                <Menu>
+                    <MenuItem Header="Archivo">
+                        <MenuItem Header="Enviar"></MenuItem>
+                        <MenuItem Header="Guardar"></MenuItem>
+                        <MenuItem Header="Borrar">>
+                        </MenuItem>
+                    </MenuItem>
+                    <MenuItem Header="Herramientas" Name="_Herramientas">
+                        <MenuItem Header="Copiar" Command="Copy"></MenuItem>
+                        <MenuItem Header="Pegar" Command="Paste"></MenuItem>
+                        <Separator/>
+                        <MenuItem Header="Cortar" Command="Cut"></MenuItem>
+                    </MenuItem>
+                    <MenuItem Header="Ver"></MenuItem>
+                    <MenuItem Header="Editar"></MenuItem>
+                    <MenuItem Header="Help"></MenuItem>
+                </Menu>
+            </StackPanel>
+
+            <!-- PAnel de abajo -->
+            <Grid DockPanel.Dock="Bottom" Margin="5" Background="Bisque" Height="30">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="El usuario: " Grid.Column="0" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="1" Foreground="LawnGreen" VerticalAlignment="Center"
+                 Text="{Binding ElementName=nombre, Path=Text}" FontWeight="Bold" TextTrimming="CharacterEllipsis"></TextBlock>
+                <TextBlock Grid.Column="2" Text="Contraseña Focus: " VerticalAlignment="Center"></TextBlock>
+                <TextBlock Text="{Binding  ElementName=contra, Path=IsFocused}" Grid.Column="3" VerticalAlignment="Center"></TextBlock>
+                <!-- TextBlock Text="{Binding ElementName=Fecha, Path=SelectedDate, UpdateSourceTrigger=PropertyChanged, StringFormat=d}" Grid.Column="3"></> -->
+            </Grid>
+
+            <!-- Panel de la izq -->
+            <Border BorderBrush="FloralWhite" BorderThickness="3" CornerRadius="5">
+                <WrapPanel DockPanel.Dock="Left" Orientation="Vertical" Background="Azure" >
+                    <TextBlock Text="Seleciona tus aficiones: " Padding="10, 10, 0, 10"></TextBlock>
+                    <CheckBox Content="Futbol: "></CheckBox>
+                    <CheckBox Content="Videojuegos: "></CheckBox>
+                    <CheckBox Content="Series: "></CheckBox>
+                    <CheckBox Content="Tenis: "></CheckBox>
+                    <CheckBox Content="Tirar adoquines: "></CheckBox>
+                    <CheckBox Content="Dormir: "></CheckBox>
+                    <DatePicker  SelectedDate="2000-12-12"></DatePicker>
+                </WrapPanel>
+            </Border>
+
+            <Border  Margin="10" BorderBrush="Red" BorderThickness="1" DockPanel.Dock="Right" CornerRadius="10, 10, 10, 10" Background="Beige">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="Formulario  registro: " Grid.Row="0" Grid.Column="0" FontStyle="Oblique" FontSize="14" FontWeight="Bold" Grid.ColumnSpan="2"></Label>
+
+                    <!-- Para el nombre -->
+                    <Label Grid.Row="1" Grid.Column="0" Content="_Nombre: " VerticalAlignment="Center" Target="{Binding ElementName=nombre}"></Label>
+                    <TextBox Name="nombre" Grid.Row="1" Grid.Column="1" Width="100" Margin="5, 5, 5, 5"></TextBox>
+
+                    <!-- Para el la contraseña -->
+                    <Label Content="Contraseña: " Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" Target="{Binding ElementName=contra}"></Label>
+                    <PasswordBox Name="contra" Grid.Row="2" Grid.Column="1" Width="100" Margin="5, 5, 5, 5"></PasswordBox>
+
+                    <TextBlock Text="Continente" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center">
+                    </TextBlock>
+
+                    <Grid Grid.Row="3" Grid.Column="1" Margin="0, 2, 5, 2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <RadioButton Content="Antártida" Grid.Column="0" Grid.Row="0" GroupName="Continente"></RadioButton>
+                        <RadioButton Content="América" Grid.Column="0" Grid.Row="1" GroupName="Continente"></RadioButton>
+                        <RadioButton Content="Oceania" Grid.Column="0" Grid.Row="2" GroupName="Continente"></RadioButton>
+                        <RadioButton Content="Asia" Grid.Column="1" Grid.Row="0" GroupName="Continente" RenderTransformOrigin="0.5,0.5">
+                            <RadioButton.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="0.118"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </RadioButton.RenderTransform>
+                        </RadioButton>
+                        <RadioButton Content="África" Grid.Column="1" Grid.Row="1" GroupName="Continente"></RadioButton>
+                        <RadioButton Content="Europa" Grid.Column="1" Grid.Row="2" GroupName="Continente"></RadioButton>
+                    </Grid>
+                    <Button Content="_Enviar" Grid.Column="0" Grid.Row="4" Width="40" Height="20" Margin="0, 5, 0, 5" Style="{StaticResource envio}"></Button>
+                    <Button Content="C_ancelar" Grid.Column="1" Grid.Row="4" Width="50" Height="20" Margin="0, 5, 0, 5"></Button>
+                    <Slider Name="_Barra" Maximum="100" Height="20" Grid.Column="0" Grid.Row="5" Width="100" 
+                            Visibility="Visible" TickPlacement="BottomRight" TickFrequency="10" 
+                            IsSnapToTickEnabled="True"></Slider>
+                    <TextBlock Text="{Binding ElementName=_Barra, Path=Value, UpdateSourceTrigger=Default}" Width="100" Visibility="Visible" Grid.Column="1" Grid.Row="5" Height="21" Margin="14,0,15,0" VerticalAlignment="Bottom"></TextBlock>
+                    <Calendar Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" SelectionMode="MultipleRange" Name="Fecha"></Calendar>
+                </Grid>
+            </Border>
+        </DockPanel>
+
+        <!-- Panel de la derecha -->
+        <Grid Margin="10" Grid.Column="1">
+            <TabControl TabStripPlacement="Bottom">
+                <TabItem Header="Seleccion">
+                    <StackPanel Margin="20">
+                        <Image Source="img/escudo.png"/>
+                        <StackPanel.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="1 Mundial">
+                                    <MenuItem.Icon>
+                                        <Image Source="img/mundial.jpg"></Image>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Header="3 Eurocopas">
+                                    <MenuItem.Icon>
+                                        <Image Source="img/euro.jpg"></Image>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </ContextMenu>
+                        </StackPanel.ContextMenu>
+                    </StackPanel>
+                </TabItem>
+
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="img/calendario.png" Width="15" Height="14"></Image>
+                            <TextBlock Text="Fecha Seleccionada" Margin="3, 0, 0, 0"></TextBlock>
+                        </StackPanel>
+                    </TabItem.Header>
+                    <Border BorderBrush="OrangeRed" BorderThickness="3"  CornerRadius="10, 10, 10, 10" Background="Aquamarine">
+                        <Expander VerticalAlignment="Top" HorizontalAlignment="Center" Header="Fechas" ExpandDirection="Down">
+                            <ListBox ItemsSource="{Binding ElementName=Fecha, Path=SelectedDates}" MinHeight="150" Grid.Column="3" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" Margin="0, 10,0,0"/>
+                        </Expander>
+                    </Border>
+                </TabItem>
+
+                <TabItem Header="Animacion" Background="Red">
+                    <Grid Background="Red">
+                        <TextBlock Name="lblStyled" Text="Vamos Selección a por la Euro" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Yellow">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <EventTrigger RoutedEvent="MouseEnter">
+                                            <EventTrigger.Actions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Duration="0:0:0.300" Storyboard.TargetProperty="FontSize" To="28"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger.Actions>
+                                        </EventTrigger>
+                                        <EventTrigger RoutedEvent="MouseLeave">
+                                            <EventTrigger.Actions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Duration="0:0:0.800" Storyboard.TargetProperty="FontSize" To="18" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger.Actions>
+                                        </EventTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+    </Grid>
+</Window>
